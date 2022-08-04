@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 
 part 'category_tournament_select_event.dart';
 part 'category_tournament_select_state.dart';

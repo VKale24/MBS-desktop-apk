@@ -1,8 +1,10 @@
 part of 'category_tournament_select_bloc.dart';
 
-abstract class CategoryTournamentSelectEvent {
+abstract class CategoryTournamentSelectEvent extends Equatable {
   const CategoryTournamentSelectEvent();
-
+  
+  @override
+  List<Object?> get props => [];
 }
 
 class SelectInfoTournament extends CategoryTournamentSelectEvent {

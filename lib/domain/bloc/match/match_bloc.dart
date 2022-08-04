@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:desktop_apk/data/model/match_model.dart';
 import 'package:desktop_apk/data/model/team_match_model.dart';
 import 'package:desktop_apk/network/match_network.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 part 'match_event.dart';

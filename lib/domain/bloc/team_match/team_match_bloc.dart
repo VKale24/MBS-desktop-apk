@@ -7,6 +7,7 @@ import 'package:desktop_apk/domain/entities/team.dart';
 import 'package:desktop_apk/network/match_stats_network.dart';
 import 'package:desktop_apk/network/team_match_network.dart';
 import 'package:desktop_apk/data/model/team_match_model.dart';
+import 'package:equatable/equatable.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
 part 'team_match_event.dart';

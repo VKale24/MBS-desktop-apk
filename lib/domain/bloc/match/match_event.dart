@@ -1,9 +1,10 @@
 part of 'match_bloc.dart';
 
 @immutable
-abstract class MatchEvent {
+abstract class MatchEvent extends Equatable {
   const MatchEvent();
 
+  @override
   List<Object> get props => [];
 }
 

@@ -1,5 +1,6 @@
 import 'package:desktop_apk/domain/entities/tournament.dart';
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import 'package:desktop_apk/network/tournament_network.dart';

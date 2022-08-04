@@ -1,9 +1,11 @@
 part of 'match_stats_bloc.dart';
 
 @immutable
-abstract class MatchStatsEvent {
+abstract class MatchStatsEvent extends Equatable {
   const MatchStatsEvent();
 
+ @override
+  List<Object?> get props => [];
 }
 
 class InitMatchStats extends MatchStatsEvent {
