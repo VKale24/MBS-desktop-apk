@@ -1,5 +1,5 @@
-import 'package:desktop_apk/common/network.dart';
-import 'package:desktop_apk/common/values.dart';
+import 'package:desktop_apk/global/network.dart';
+import 'package:desktop_apk/global/values.dart';
 import 'package:desktop_apk/domain/bloc/team/team_bloc.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 

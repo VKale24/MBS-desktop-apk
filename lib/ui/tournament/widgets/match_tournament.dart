@@ -1,22 +1,24 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:desktop_apk/common/network.dart';
-import 'package:desktop_apk/common/values.dart';
-import 'package:desktop_apk/data/model/team_tournament_model.dart';
-import 'package:desktop_apk/domain/entities/team_tournament.dart';
-import 'package:desktop_apk/network/team_tournament_network.dart';
-import 'package:desktop_apk/ui/common/routes.dart';
-import 'package:desktop_apk/ui/match/match.dart';
+import 'package:desktop_apk/domain/repository/match_repository.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-
-import 'package:desktop_apk/common/color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:desktop_apk/network/match_network.dart';
+
+import 'package:desktop_apk/global/color.dart';
+import 'package:desktop_apk/global/values.dart';
+import 'package:desktop_apk/global/network.dart';
+import 'package:desktop_apk/ui/match/match.dart';
+import 'package:desktop_apk/ui/common/routes.dart';
 import 'package:desktop_apk/data/model/match_model.dart';
 import 'package:desktop_apk/data/model/team_match_model.dart';
 import 'package:desktop_apk/data/model/tournament_model.dart';
 import 'package:desktop_apk/domain/bloc/match/match_bloc.dart';
+import 'package:desktop_apk/domain/entities/team_tournament.dart';
 import 'package:desktop_apk/ui/tournament/widgets/card_match.dart';
+import 'package:desktop_apk/data/model/team_tournament_model.dart';
+
+import '../../../domain/repository/team_tournament_repository.dart';
+import '../../../global/service_locator.dart';
 
 class MatchTournament extends StatefulWidget {
   const MatchTournament({
@@ -36,12 +38,15 @@ class _MatchTournamentState extends State<MatchTournament>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
+    super.initState();
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 200));
 
     _progressAnimation = CurvedAnimation(
         parent: _animationController, curve: const Interval(0.0, 0.65));
-    super.initState();
+    BlocProvider.of<MatchBloc>(context).add(GetMatchsByTournamentAndRound(
+        idTournament: widget.tournamentSelected.idTournament,
+        round: roundSelected));
   }
 
   @override
@@ -62,9 +67,6 @@ class _MatchTournamentState extends State<MatchTournament>
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<MatchBloc>(context).add(GetMatchsByTournamentAndRound(
-        idTournament: widget.tournamentSelected.idTournament,
-        round: roundSelected));
     return Stack(
       children: [
         Container(
@@ -228,8 +230,11 @@ class _MatchTournamentState extends State<MatchTournament>
                                                 ),
                                                 onTap: () {
                                                   Navigator.of(context).push(
-                                                      slide(() =>
-                                                          const MatchPage()));
+                                                      slide(() => MatchPage(
+                                                            listTeamMatchs:
+                                                                listMatchs[
+                                                                    index],
+                                                          )));
                                                 },
                                               ),
                                               MouseRegion(
@@ -348,9 +353,9 @@ class _DropDownTeamsTournamentState extends State<DropDownTeamsTournament> {
   @override
   Widget build(BuildContext context) {
     Future<List<MenuFlyoutItem>> createDropDownTeamList(String team) async {
-      ListTeamTournaments listTeamTournaments = await TeamTournamentNetwork
-          .instance
-          .getTeamsByTournament(widget.tournamentSelected.idTournament);
+      ListTeamTournaments listTeamTournaments =
+          await locator<TeamTournamentRepository>()
+              .getTeamsByTournament(widget.tournamentSelected.idTournament);
       List<MenuFlyoutItem> listMenuFlyoutItems = [];
       for (int i = 0; i < listTeamTournaments.listTeamTournament.length; i++) {
         TeamTournament teamTournament =
@@ -571,7 +576,7 @@ class _DropDownTeamsTournamentState extends State<DropDownTeamsTournament> {
                       date: date.text,
                       round: int.parse(round.text),
                       tournamentModel: widget.tournamentSelected);
-                  bool isCreate = await MatchNetwork.instance.createMatch(
+                  bool isCreate = await locator<MatchRepository>().createMatch(
                       matchModel,
                       selectedTeam1["idTeam"],
                       selectedTeam2["idTeam"],

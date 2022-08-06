@@ -1,12 +1,14 @@
-import 'package:desktop_apk/common/network.dart';
-import 'package:desktop_apk/common/values.dart';
+import 'package:desktop_apk/global/network.dart';
+import 'package:desktop_apk/global/values.dart';
 import 'package:desktop_apk/data/model/roster_model.dart';
-import 'package:desktop_apk/network/player_network.dart';
-import 'package:desktop_apk/network/roster_network.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:desktop_apk/domain/entities/player.dart';
 import 'package:desktop_apk/domain/entities/player_stats.dart';
+
+import '../../../domain/repository/roster_repository.dart';
+import '../../../global/service_locator.dart';
+import '../../../domain/repository/player_repository.dart';
 
 class TeamTournamentPlayer extends StatefulWidget {
   const TeamTournamentPlayer({
@@ -26,7 +28,7 @@ class _TeamTournamentPlayerState extends State<TeamTournamentPlayer> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: RosterNetwork.instance.getTeamsByPlayer(widget.player.idPlayer),
+        future: locator<RosterRepository>().getTeamsByPlayer(widget.player.idPlayer),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.data == null) {
             return const Center(child: ProgressRing());
@@ -138,7 +140,7 @@ class _TeamTournamentPlayerState extends State<TeamTournamentPlayer> {
                                     ),
                                   ),
                                   onTap: () async {
-                                    await RosterNetwork.instance
+                                    await locator<RosterRepository>()
                                         .removePlayerOfRoster(
                                             roster.teamModel.idTeam,
                                             roster.tournamentModel.idTournament,
@@ -181,7 +183,7 @@ class _TeamTournamentPlayerState extends State<TeamTournamentPlayer> {
                             height: 10,
                           ),
                           FutureBuilder(
-                            future: PlayerNetwork.instance
+                            future: locator<PlayerRepository>()
                                 .getStatsOfPlayerByTournament(
                                     widget.player.idPlayer,
                                     roster.tournamentModel.idTournament),

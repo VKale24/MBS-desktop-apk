@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio_lib;
 
-import 'package:desktop_apk/common/network.dart';
+import 'package:desktop_apk/global/network.dart';
 import 'package:desktop_apk/domain/entities/team.dart';
 import 'package:desktop_apk/data/model/team_model.dart';
 import 'package:desktop_apk/data/datasource/team_network_data_source.dart';

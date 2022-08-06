@@ -1,12 +1,14 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:convert';
-import 'package:desktop_apk/common/network.dart';
+import 'package:desktop_apk/global/network.dart';
 import 'package:desktop_apk/data/datasource/match_network_data_source.dart';
 import 'package:desktop_apk/data/model/match_model.dart';
 import 'package:desktop_apk/data/model/team_match_model.dart';
-import 'package:desktop_apk/network/team_match_network.dart';
 import 'package:http/http.dart' as http;
+
+import '../domain/repository/team_match_repository.dart';
+import '../global/service_locator.dart';
 
 class MatchNetwork extends MatchNetworkDataSource {
   MatchNetwork._();
@@ -77,7 +79,7 @@ class MatchNetwork extends MatchNetworkDataSource {
       final Matchs listMatchs = Matchs.fromJsonList(responseString);
 
       for (MatchModel matchModel in listMatchs.matchs) {
-        listTeamMatchs.add(await TeamMatchNetwork.instance
+        listTeamMatchs.add(await locator<TeamMatchRepository>()
             .getTeamsByMatch(matchModel.idMatch));
       }
 
@@ -140,7 +142,7 @@ class MatchNetwork extends MatchNetworkDataSource {
         "${Network.url}/match/tournament/$idTournament",
       ),
     );
-
+    print(response.statusCode);
     if (response.statusCode == 200) {
       final responseString = json.decode(response.body);
       final Matchs matchs = Matchs.fromJsonList(responseString);

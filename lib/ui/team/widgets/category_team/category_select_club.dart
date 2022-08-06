@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:desktop_apk/domain/entities/team.dart';
 import 'package:desktop_apk/domain/bloc/category_team_select/category_team_select_bloc.dart';
 

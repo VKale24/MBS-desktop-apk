@@ -1,9 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:desktop_apk/domain/entities/team.dart';
-import 'package:desktop_apk/network/roster_network.dart';
 import 'package:desktop_apk/data/model/roster_model.dart';
 import 'package:desktop_apk/ui/team/widgets/category_team/category_team.dart';
 import 'package:desktop_apk/ui/team/widgets/category_team/category_calendar.dart';
@@ -11,6 +10,9 @@ import 'package:desktop_apk/ui/team/widgets/players_team/players_team_table.dart
 import 'package:desktop_apk/ui/team/widgets/category_team/category_info_team.dart';
 import 'package:desktop_apk/domain/bloc/category_team_select/category_team_select_bloc.dart';
 import 'package:desktop_apk/ui/team/widgets/players_team/players_team_table_data_source.dart';
+
+import '../../../domain/repository/roster_repository.dart';
+import '../../../global/service_locator.dart';
 
 class TeamDetails extends StatefulWidget {
   const TeamDetails({Key? key, required this.team}) : super(key: key);
@@ -47,7 +49,7 @@ class _TeamDetailsState extends State<TeamDetails> {
         return CategoryTeam(
           // widget: PlayersOfTeam(team: widget.team),
           widget: FutureBuilder(
-              future: RosterNetwork.instance
+              future: locator<RosterRepository>()
                   .getActiveRosterByTeam(widget.team.idTeam),
               builder: (context, AsyncSnapshot snapshot) {
                 if (!snapshot.hasData) {

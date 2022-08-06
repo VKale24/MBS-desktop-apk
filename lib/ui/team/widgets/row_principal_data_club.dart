@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:desktop_apk/domain/entities/team.dart';
 
 class RowPrincipalDataClub extends StatelessWidget {

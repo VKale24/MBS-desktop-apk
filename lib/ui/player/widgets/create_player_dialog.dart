@@ -3,15 +3,18 @@
 
 import 'dart:io';
 
-import 'package:desktop_apk/common/color.dart';
-import 'package:desktop_apk/common/network.dart';
-import 'package:desktop_apk/common/values.dart';
+import 'package:desktop_apk/global/color.dart';
+import 'package:desktop_apk/global/network.dart';
+import 'package:desktop_apk/global/values.dart';
 import 'package:desktop_apk/data/model/player_model.dart';
 import 'package:desktop_apk/domain/bloc/player/player_bloc.dart';
 import 'package:desktop_apk/domain/logic/logic_functions.dart';
 import 'package:desktop_apk/network/player_network.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../domain/repository/player_repository.dart';
+import '../../../global/service_locator.dart';
 
 class CreatePlayerDialog extends StatefulWidget {
   const CreatePlayerDialog({Key? key, required this.refreshStateCallback})
@@ -291,7 +294,7 @@ class _CreatePlayerDialogState extends State<CreatePlayerDialog> {
                   });
                 }
                 PlayerModel playerCreated =
-                    await PlayerNetwork.instance.createPlayer(player);
+                     await locator<PlayerRepository>().createPlayer(player);
                 if (isImageUpload) {
                   BlocProvider.of<PlayerBloc>(context).add(UploadImageOfPlayer(
                       player: playerCreated, image: imagePlayer));

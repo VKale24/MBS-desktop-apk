@@ -1,14 +1,16 @@
-import 'package:desktop_apk/common/color.dart';
-import 'package:desktop_apk/common/network.dart';
-import 'package:desktop_apk/common/values.dart';
+import 'package:desktop_apk/global/color.dart';
+import 'package:desktop_apk/global/network.dart';
+import 'package:desktop_apk/global/values.dart';
 import 'package:desktop_apk/data/model/match_stats_model.dart';
 import 'package:desktop_apk/data/model/team_match_model.dart';
 import 'package:desktop_apk/domain/bloc/team/team_bloc.dart';
-import 'package:desktop_apk/network/match_stats_network.dart';
 import 'package:desktop_apk/ui/common/routes.dart';
 import 'package:desktop_apk/ui/team/widgets/team_details.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../domain/repository/match_stats_repository.dart';
+import '../../../global/service_locator.dart';
 
 class CardMatch extends StatefulWidget {
   const CardMatch({
@@ -158,7 +160,7 @@ class ResultMatch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: MatchStatsNetwork.instance.getStatsByMatchAndTeam(
+        future: locator<MatchStatsRepository>().getStatsByMatchAndTeam(
             listMatchs[index].listTeamMatchs[teamIndex].matchModel.idMatch,
             listMatchs[index].listTeamMatchs[teamIndex].teamModel.idTeam),
         builder: ((context, AsyncSnapshot snapshot) {

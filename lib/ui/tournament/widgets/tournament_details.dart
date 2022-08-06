@@ -1,6 +1,5 @@
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:desktop_apk/data/model/team_tournament_model.dart';
-import 'package:desktop_apk/network/team_tournament_network.dart';
 import 'package:desktop_apk/ui/tournament/widgets/teams_tournament_table.dart';
 import 'package:desktop_apk/ui/tournament/widgets/teams_tournament_table_data_source.dart';
 import 'package:fluent_ui/fluent_ui.dart';
@@ -11,6 +10,9 @@ import 'package:desktop_apk/domain/bloc/team_tournament/teamtournament_bloc.dart
 import 'package:desktop_apk/ui/tournament/widgets/category_tournament/category_tournament.dart';
 import 'package:desktop_apk/ui/tournament/widgets/category_tournament/category_info_tournament.dart';
 import 'package:desktop_apk/domain/bloc/category_tournament_select/category_tournament_select_bloc.dart';
+
+import '../../../domain/repository/team_tournament_repository.dart';
+import '../../../global/service_locator.dart';
 
 class TournamentDetails extends StatefulWidget {
   const TournamentDetails({Key? key, required this.tournament})
@@ -45,7 +47,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
         return CategoryTournament(
           tournament: widget.tournament,
           widget: FutureBuilder(
-              future: TeamTournamentNetwork.instance
+              future: locator<TeamTournamentRepository>()
                   .getTeamsByTournament(widget.tournament.idTournament),
               builder: (context, AsyncSnapshot snapshot) {
                 if (!snapshot.hasData) {

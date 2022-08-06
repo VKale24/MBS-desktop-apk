@@ -14,7 +14,7 @@ abstract class TournamentNetworkDataSource {
 
   Future<bool> addTeamToTournament(int idTournament, int idTeam);
 
-  Future<bool> updateTournament(int idTournament, TournamentModel tournament);
+  Future<bool> updateTournament(TournamentModel tournament);
 
   Future<dynamic> uploadImageToTournament(int idTournament, File image);
 

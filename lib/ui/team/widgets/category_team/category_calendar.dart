@@ -1,16 +1,18 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:desktop_apk/common/color.dart';
-import 'package:desktop_apk/common/values.dart';
-import 'package:desktop_apk/common/network.dart';
+import 'package:desktop_apk/global/color.dart';
+import 'package:desktop_apk/global/values.dart';
+import 'package:desktop_apk/global/network.dart';
 import 'package:desktop_apk/domain/entities/team.dart';
 import 'package:desktop_apk/data/model/goal_model.dart';
 import 'package:desktop_apk/domain/entities/match_game.dart';
-import 'package:desktop_apk/network/match_stats_network.dart';
 import 'package:desktop_apk/data/model/match_stats_model.dart';
 import 'package:desktop_apk/domain/bloc/team_match/team_match_bloc.dart';
 import 'package:desktop_apk/domain/bloc/match_stats/match_stats_bloc.dart';
+
+import '../../../../domain/repository/match_stats_repository.dart';
+import '../../../../global/service_locator.dart';
 
 class TeamCalendar extends StatefulWidget {
   const TeamCalendar({
@@ -245,9 +247,7 @@ class _TeamCalendarState extends State<TeamCalendar> {
                                                             ],
                                                           ))
                                                       : FutureBuilder(
-                                                          future: MatchStatsNetwork
-                                                              .instance
-                                                              .getStatsByMatch(
+                                                          future: locator<MatchStatsRepository>().getStatsByMatch(
                                                                   matchGame
                                                                       .match
                                                                       .idMatch),
@@ -624,9 +624,9 @@ class PlayersScores extends StatelessWidget {
             FutureBuilder(
                 future: teamSelected.idTeam ==
                         listMatchStats.matchsStats[0].teamModel.idTeam
-                    ? MatchStatsNetwork.instance.getGoalsByMatchStats(
+                    ? locator<MatchStatsRepository>().getGoalsByMatchStats(
                         listMatchStats.matchsStats[0].idMatchStats)
-                    : MatchStatsNetwork.instance.getGoalsByMatchStats(
+                    : locator<MatchStatsRepository>().getGoalsByMatchStats(
                         listMatchStats.matchsStats[1].idMatchStats),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (!snapshot.hasData) {
@@ -662,9 +662,9 @@ class PlayersScores extends StatelessWidget {
             FutureBuilder(
                 future: teamSelected.idTeam ==
                         listMatchStats.matchsStats[0].teamModel.idTeam
-                    ? MatchStatsNetwork.instance.getGoalsByMatchStats(
+                    ? locator<MatchStatsRepository>().getGoalsByMatchStats(
                         listMatchStats.matchsStats[1].idMatchStats)
-                    : MatchStatsNetwork.instance.getGoalsByMatchStats(
+                    :locator<MatchStatsRepository>().getGoalsByMatchStats(
                         listMatchStats.matchsStats[0].idMatchStats),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (!snapshot.hasData) {

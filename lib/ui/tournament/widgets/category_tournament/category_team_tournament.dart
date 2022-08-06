@@ -1,4 +1,4 @@
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
 class CategoryTeamTournament extends StatefulWidget {

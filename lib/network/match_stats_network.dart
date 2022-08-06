@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:desktop_apk/data/model/goal_model.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:desktop_apk/common/network.dart';
+import 'package:desktop_apk/global/network.dart';
 import 'package:desktop_apk/data/model/match_stats_model.dart';
 import 'package:desktop_apk/data/datasource/match_stats_data_source_network.dart';
 

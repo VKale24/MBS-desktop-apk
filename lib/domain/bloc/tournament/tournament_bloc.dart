@@ -1,9 +1,10 @@
+import 'package:desktop_apk/global/service_locator.dart';
 import 'package:desktop_apk/domain/entities/tournament.dart';
 import 'package:bloc/bloc.dart';
+import 'package:desktop_apk/domain/repository/tournament_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import 'package:desktop_apk/network/tournament_network.dart';
 import 'package:desktop_apk/data/model/tournament_model.dart';
 
 part 'tournament_event.dart';
@@ -25,7 +26,7 @@ class TournamentBloc extends Bloc<TournamentEvent, TournamentState> {
     try {
       emit(LoadingTournaments());
       final Tournaments tournaments =
-          await TournamentNetwork.instance.getAllTournaments();
+          await locator<TournamentRepository>().getAllTournaments();
       if (tournaments.tournaments.isEmpty) emit(EmmptyTournaments());
 
       emit(LoadedTournaments(tournaments: tournaments));
@@ -51,7 +52,7 @@ class TournamentBloc extends Bloc<TournamentEvent, TournamentState> {
   ) async {
     try {
       emit(LoadingTournaments());
-      await TournamentNetwork.instance.createTournament(event.tournament);
+      await locator<TournamentRepository>().createTournament(event.tournament);
 
       await _onGettingTournaments(const GetTournaments(), emit);
     } catch (e) {
@@ -64,8 +65,7 @@ class TournamentBloc extends Bloc<TournamentEvent, TournamentState> {
     Emitter<TournamentState> emit,
   ) async {
     try {
-      await TournamentNetwork.instance
-          .updateTournament(event.tournament.idTournament, event.tournament);
+      await locator<TournamentRepository>().updateTournament(event.tournament);
 
       //Emitir un nuevo estado con el jugador actualizado
       await _onGettingTournaments(const GetTournaments(), emit);
@@ -79,14 +79,10 @@ class TournamentBloc extends Bloc<TournamentEvent, TournamentState> {
     Emitter<TournamentState> emit,
   ) async {
     try {
-      TournamentModel tournamentModel = await TournamentNetwork.instance
-          .uploadImageToTournament(
-              event.tournamentModel.idTournament, event.image);
-      if (event.nextEmit == "selectedTournament") {
-        _onSelectTournament(SelectTournament(tournamentModel), emit);
-      } else {
-        await _onGettingTournaments(const GetTournaments(), emit);
-      }
+      await locator<TournamentRepository>().uploadImageToTournament(
+          event.tournamentModel.idTournament, event.image);
+
+      await _onGettingTournaments(const GetTournaments(), emit);
     } catch (e) {
       _handleError(e);
     }

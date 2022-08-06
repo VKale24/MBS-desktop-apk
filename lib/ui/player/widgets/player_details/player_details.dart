@@ -9,9 +9,9 @@ import 'package:desktop_apk/ui/player/widgets/player_details/widgets/player_pers
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:desktop_apk/common/color.dart';
-import 'package:desktop_apk/common/values.dart';
-import 'package:desktop_apk/common/network.dart';
+import 'package:desktop_apk/global/color.dart';
+import 'package:desktop_apk/global/values.dart';
+import 'package:desktop_apk/global/network.dart';
 import 'package:desktop_apk/domain/logic/logic_functions.dart';
 import 'package:desktop_apk/domain/bloc/player/player_bloc.dart';
 import 'package:desktop_apk/ui/player/widgets/team_tournament_player.dart';

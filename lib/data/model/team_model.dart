@@ -80,4 +80,8 @@ class TeamModel extends Team {
         "town": town,
         //"active": active,
       };
+  @override
+  String toString() {
+    return "idTeam: $idTeam \n name: $name  \n manager: $manager  \n captain: $captain \n equipation_color: $equipationColor \n image: $image \n headerImage: $headerImage \n description: $description \n town: $town \n active: $active";
+  }
 }

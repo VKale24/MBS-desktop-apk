@@ -1,8 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:desktop_apk/common/color.dart';
-import 'package:desktop_apk/common/network.dart';
-import 'package:desktop_apk/common/values.dart';
+import 'package:desktop_apk/global/color.dart';
+import 'package:desktop_apk/global/network.dart';
+import 'package:desktop_apk/global/values.dart';
 import 'package:desktop_apk/data/model/tournament_model.dart';
 import 'package:desktop_apk/domain/bloc/team/team_bloc.dart';
 import 'package:desktop_apk/ui/common/routes.dart';

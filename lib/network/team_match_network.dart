@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:desktop_apk/common/network.dart';
+import 'package:desktop_apk/global/network.dart';
 import 'package:desktop_apk/data/datasource/team_match_network_data_source.dart';
 import 'package:desktop_apk/data/model/team_match_model.dart';
 import 'package:desktop_apk/domain/entities/match_game.dart';

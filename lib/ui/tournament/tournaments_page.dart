@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:desktop_apk/data/model/tournament_model.dart';
 import 'package:desktop_apk/domain/bloc/tournament/tournament_bloc.dart';
 import 'package:desktop_apk/ui/tournament/widgets/tournaments_table.dart';
@@ -8,9 +8,11 @@ import 'package:desktop_apk/ui/tournament/widgets/tournaments_table_data_source.
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:desktop_apk/network/player_network.dart';
 import 'package:desktop_apk/data/model/player_model.dart';
 import 'package:desktop_apk/domain/bloc/player/player_bloc.dart';
+
+import '../../global/service_locator.dart';
+import '../../domain/repository/player_repository.dart';
 
 class TournamentsPage extends StatefulWidget {
   const TournamentsPage({Key? key}) : super(key: key);
@@ -162,9 +164,9 @@ class _TournamentsPageState extends State<TournamentsPage> {
             ),
             onTap: () async {
               players.players[index].active
-                  ? await PlayerNetwork.instance
+                  ? await locator<PlayerRepository>()
                       .desactivatePlayer(players.players[index].idPlayer)
-                  : await PlayerNetwork.instance
+                  : await locator<PlayerRepository>()
                       .activatePlayer(players.players[index].idPlayer);
 
               //******************************* */

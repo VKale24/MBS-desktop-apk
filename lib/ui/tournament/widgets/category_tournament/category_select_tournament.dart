@@ -2,7 +2,7 @@ import 'package:desktop_apk/domain/entities/tournament.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:desktop_apk/domain/bloc/category_tournament_select/category_tournament_select_bloc.dart';
 
 class CategorySelectTournament extends StatelessWidget {

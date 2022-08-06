@@ -2,9 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import 'package:desktop_apk/network/team_network.dart';
 import 'package:desktop_apk/domain/entities/team.dart';
 import 'package:desktop_apk/data/model/team_model.dart';
+
+import '../../../global/service_locator.dart';
+import '../../repository/team_repository.dart';
 
 part 'team_event.dart';
 part 'team_state.dart';
@@ -24,7 +26,7 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
   ) async {
     try {
       emit(LoadingTeams());
-      await TeamNetwork.instance.createTeam(event.team);
+      await locator<TeamRepository>().createTeam(event.team);
       await _onGettingTeams(const GetTeams(), emit);
     } catch (e) {
       _handleError(e);
@@ -36,7 +38,8 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
     Emitter<TeamState> emit,
   ) async {
     try {
-      final Teams teams = await TeamNetwork.instance.getAllTeams();
+      final Teams teams = await locator<TeamRepository>().getAllTeams();
+
       if (teams.teams.isEmpty) emit(EmmptyTeams());
       emit(LoadedTeams(teams: teams));
     } catch (e) {
@@ -60,13 +63,10 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
     Emitter<TeamState> emit,
   ) async {
     try {
-      TeamModel team = await TeamNetwork.instance
+      await await locator<TeamRepository>()
           .uploadImageToTeam(event.team.idTeam, event.image);
-      if (event.nextEmit == "selectedTeam") {
-        _onSelectTeam(SelectTeam(team: team), emit);
-      } else {
-        await _onGettingTeams(const GetTeams(), emit);
-      }
+
+      await _onGettingTeams(const GetTeams(), emit);
     } catch (e) {
       _handleError(e);
     }
@@ -77,10 +77,9 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
     Emitter<TeamState> emit,
   ) async {
     try {
-      TeamModel team =
-          await TeamNetwork.instance.updateTeam(event.team.idTeam, event.team);
+      await locator<TeamRepository>().updateTeam(event.team.idTeam, event.team);
 
-      _onSelectTeam(SelectTeam(team: team), emit);
+      //_onSelectTeam(SelectTeam(team: team), emit);
     } catch (e) {
       _handleError(e);
     }

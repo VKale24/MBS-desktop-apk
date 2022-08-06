@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:equatable/equatable.dart';
 
 part 'category_team_select_event.dart';
 part 'category_team_select_state.dart';
