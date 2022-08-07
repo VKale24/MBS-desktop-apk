@@ -1,15 +1,17 @@
 import 'package:desktop_apk/data/model/roster_model.dart';
-import 'package:desktop_apk/network/roster_network.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:desktop_apk/common/color.dart';
-import 'package:desktop_apk/common/values.dart';
-import 'package:desktop_apk/common/network.dart';
+import 'package:desktop_apk/global/color.dart';
+import 'package:desktop_apk/global/values.dart';
+import 'package:desktop_apk/global/network.dart';
 import 'package:desktop_apk/ui/common/routes.dart';
 import 'package:desktop_apk/domain/entities/team.dart';
 import 'package:desktop_apk/domain/bloc/player/player_bloc.dart';
 import 'package:desktop_apk/ui/player/widgets/player_details/player_details.dart';
+
+import '../../../../domain/repository/roster_repository.dart';
+import '../../../../global/service_locator.dart';
 
 class PlayersOfTeam extends StatefulWidget {
   const PlayersOfTeam({
@@ -148,7 +150,7 @@ class _PlayersOfTeamState extends State<PlayersOfTeam> {
                           ),
                         ),
                         FutureBuilder(
-                            future: RosterNetwork.instance
+                            future: locator<RosterRepository>()
                                 .getActiveRosterByTeam(widget.team.idTeam),
                             builder: (context, AsyncSnapshot snapshot) {
                               if (!snapshot.hasData) {
@@ -472,7 +474,7 @@ class _PlayersOfTeamState extends State<PlayersOfTeam> {
             ),
             onTap: () async {
               if (roster.playerActive) {
-                await RosterNetwork.instance.removePlayerOfRoster(
+                await locator<RosterRepository>().removePlayerOfRoster(
                     roster.teamModel.idTeam,
                     roster.tournamentModel.idTournament,
                     roster.playerModel.idPlayer);

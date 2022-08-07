@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:desktop_apk/common/network.dart';
+import 'package:desktop_apk/global/network.dart';
 import 'package:desktop_apk/domain/entities/tournament.dart';
 import 'package:desktop_apk/data/model/tournament_model.dart';
 import 'package:desktop_apk/data/model/team_tournament_model.dart';
@@ -30,7 +30,7 @@ class TeamTournamentNetwork extends TeamTournamentNetworkDataSource {
   }
 
   @override
-  Future<Tournament> getTournamentByTeam(int idTeam) async {
+  Future<Tournament> getTournamentsByTeam(int idTeam) async {
     final http.Response response = await http.get(
       Uri.parse(
         "${Network.url}/team_tournament/team/$idTeam",

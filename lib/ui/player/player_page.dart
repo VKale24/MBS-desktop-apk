@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
+import 'package:desktop_apk/global/service_locator.dart';
+import 'package:desktop_apk/domain/repository/player_repository.dart';
 import 'package:desktop_apk/ui/player/widgets/create_player_dialog.dart';
 import 'package:desktop_apk/ui/player/widgets/player_table_data_source.dart';
 import 'package:fluent_ui/fluent_ui.dart';
@@ -160,9 +162,9 @@ class _PlayersPageState extends State<PlayerPage> {
             ),
             onTap: () async {
               players.players[index].active
-                  ? await PlayerNetwork.instance
+                  ? await locator<PlayerRepository>()
                       .desactivatePlayer(players.players[index].idPlayer)
-                  : await PlayerNetwork.instance
+                  : await locator<PlayerRepository>()
                       .activatePlayer(players.players[index].idPlayer);
 
               //******************************* */

@@ -1,8 +1,10 @@
+import 'package:desktop_apk/global/service_locator.dart';
+import 'package:desktop_apk/domain/repository/player_repository.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 
 import 'package:desktop_apk/domain/entities/player.dart';
-import 'package:desktop_apk/network/player_network.dart';
 import 'package:desktop_apk/data/model/player_model.dart';
 
 part 'player_event.dart';
@@ -25,7 +27,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     Emitter<PlayerState> emit,
   ) async {
     try {
-      final Players players = await PlayerNetwork.instance.getAllPlayers();
+      final Players players = await locator<PlayerRepository>().getAllPlayers();
       if (players.players.isEmpty) emit(EmmptyPlayers());
 
       emit(LoadedPlayers(players: players));
@@ -40,7 +42,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   ) async {
     try {
       emit(LoadingPlayers());
-      await PlayerNetwork.instance.createPlayer(event.player);
+      await locator<PlayerRepository>().createPlayer(event.player);
       await _onGettingPlayers(const GetPlayers(), emit);
     } catch (e) {
       _handleError(e);
@@ -63,7 +65,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     Emitter<PlayerState> emit,
   ) async {
     try {
-      await PlayerNetwork.instance.updatePlayer(event.player);
+      await locator<PlayerRepository>().updatePlayer(event.player);
 
       //Emitir un nuevo estado con el jugador actualizado
       //await _onGettingPlayers(const GetPlayers(), emit);
@@ -78,7 +80,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     Emitter<PlayerState> emit,
   ) async {
     try {
-      await PlayerNetwork.instance
+      await locator<PlayerRepository>()
           .uploadImageToPlayer(event.player.idPlayer, event.image);
       await _onGettingPlayers(const GetPlayers(), emit);
     } catch (e) {

@@ -2,7 +2,7 @@
 
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:desktop_apk/ui/common/routes.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:desktop_apk/data/model/team_model.dart';

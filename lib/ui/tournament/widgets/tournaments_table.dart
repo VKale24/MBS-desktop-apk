@@ -5,7 +5,7 @@ import 'package:desktop_apk/ui/tournament/widgets/tournament_details.dart';
 import 'package:desktop_apk/ui/tournament/widgets/tournaments_table_data_source.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:desktop_apk/ui/common/routes.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';

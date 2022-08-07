@@ -1,9 +1,10 @@
 part of 'player_bloc.dart';
 
 @immutable
-abstract class PlayerEvent {
+abstract class PlayerEvent extends Equatable{
   const PlayerEvent();
 
+  @override
   List<Object> get props => [];
 }
 

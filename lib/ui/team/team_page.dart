@@ -5,9 +5,9 @@ import 'dart:io';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:desktop_apk/common/color.dart';
-import 'package:desktop_apk/common/values.dart';
-import 'package:desktop_apk/common/network.dart';
+import 'package:desktop_apk/global/color.dart';
+import 'package:desktop_apk/global/values.dart';
+import 'package:desktop_apk/global/network.dart';
 import 'package:desktop_apk/network/team_network.dart';
 import 'package:desktop_apk/data/model/team_model.dart';
 import 'package:desktop_apk/domain/bloc/team/team_bloc.dart';

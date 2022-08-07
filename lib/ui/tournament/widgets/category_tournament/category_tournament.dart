@@ -1,5 +1,5 @@
-import 'package:desktop_apk/common/network.dart';
-import 'package:desktop_apk/common/values.dart';
+import 'package:desktop_apk/global/network.dart';
+import 'package:desktop_apk/global/values.dart';
 import 'package:desktop_apk/domain/bloc/tournament/tournament_bloc.dart';
 import 'package:desktop_apk/domain/entities/tournament.dart';
 import 'package:desktop_apk/ui/tournament/widgets/category_tournament/category_select_tournament.dart';

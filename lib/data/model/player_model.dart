@@ -108,7 +108,7 @@ class PlayerModel extends Player {
         "active": active,
       };
 
- @override
+  @override
   String toString() {
     return "idPlayer: $idPlayer \n name: $name  \n lastName: $lastName  \n nickname: $nickname \n age: $age \n height: $height \n weight: $weight \n phone: $phone \n profession: $profession \n ci: $ci \n image: $image \n image_face: $imageFace \n position: $position \n active: $active";
   }

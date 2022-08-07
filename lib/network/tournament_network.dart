@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio_lib;
 
-import 'package:desktop_apk/common/network.dart';
+import 'package:desktop_apk/global/network.dart';
 import 'package:desktop_apk/data/datasource/tournament_network_data_source.dart';
 import 'package:desktop_apk/data/model/tournament_model.dart';
 import 'package:desktop_apk/domain/entities/tournament.dart';
@@ -97,10 +97,10 @@ class TournamentNetwork extends TournamentNetworkDataSource {
 
   @override
   Future<bool> updateTournament(
-      int idTournament, TournamentModel tournament) async {
+      TournamentModel tournament) async {
     final http.Response response = await http.patch(
         Uri.parse(
-          "${Network.url}/tournament/$idTournament",
+          "${Network.url}/tournament/${tournament.idTournament}",
         ),
         headers: {"content-type": "application/json"},
         body: tournamentModelToJson(tournament));

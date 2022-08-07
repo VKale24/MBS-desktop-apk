@@ -1,6 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:desktop_apk/ui/common/routes.dart';
 import 'package:desktop_apk/ui/player/widgets/player_details/player_details.dart';
 import 'package:fluent_ui/fluent_ui.dart';

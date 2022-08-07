@@ -1,4 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:desktop_apk/domain/repository/match_stats_repository.dart';
+import 'package:desktop_apk/global/service_locator.dart';
+import 'package:equatable/equatable.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:desktop_apk/data/model/match_model.dart';
@@ -20,8 +23,7 @@ class MatchStatsBloc extends Bloc<MatchStatsEvent, MatchStatsState> {
     Emitter<MatchStatsState> emit,
   ) async {
     try {
-      dynamic listMatchStats = await MatchStatsNetwork.instance
-          .getStatsByMatch(event.matchModel.idMatch);
+      dynamic listMatchStats = await locator<MatchStatsRepository>().getStatsByMatch(event.matchModel.idMatch);
       if (listMatchStats == 204) {
         emit(const EmptyMatchStatsByTeam());
       } else {

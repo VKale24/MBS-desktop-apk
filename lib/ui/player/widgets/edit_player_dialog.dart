@@ -3,7 +3,7 @@ import 'package:desktop_apk/domain/bloc/player/player_bloc.dart';
 import 'package:desktop_apk/ui/common/user_alert.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:desktop_apk/common/color.dart';
+import 'package:desktop_apk/global/color.dart';
 import 'package:desktop_apk/domain/entities/player.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -242,10 +242,16 @@ class _EditPlayerDialogState extends State<EditPlayerDialog> {
                 style: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.bold)),
           ),
-          /*Padding(
-              padding: EdgeInsets.only(left: 12.0),
-              child: 
-              ),*/
+          DropDownButton(
+            leading: const Icon(FluentIcons.align_left),
+            title: Text(widget.player.position),
+            items: [
+              MenuFlyoutItem(text: const Text('Pivot'), onPressed: () {}),
+              MenuFlyoutItem(text: const Text('Ala'), onPressed: () {}),
+              MenuFlyoutItem(text: const Text('Cierre'), onPressed: () {}),
+              MenuFlyoutItem(text: const Text('Portero'), onPressed: () {}),
+            ],
+          )
         ],
       ),
     );

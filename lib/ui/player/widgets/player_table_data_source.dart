@@ -1,7 +1,7 @@
 // ignore_for_file: unrelated_type_equality_checks
 
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:desktop_apk/common/network.dart';
+import 'package:desktop_apk/global/network.dart';
 
 import 'package:desktop_apk/data/model/player_model.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
